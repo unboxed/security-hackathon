@@ -10,7 +10,7 @@ feature "sql injection" do
     pending unless verifying_fixed?
   end
 
-  scenario "attack\nTutorial: https://github.com/unboxed/security-hackathon/wiki/R5-A1-SQL-Injection-Concatenation" do
+  scenario "attack\nTutorial: https://github.com/unboxed/security-hackathon/wiki/A1-SQL-Injection-Concatenation" do
     expect(admin_user.admin).to be_truthy
 
     login(normal_user)

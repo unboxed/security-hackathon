@@ -7,18 +7,17 @@ class AdminController < ApplicationController
   def dashboard
   end
 
-  def analytics
-    if params[:field].nil?
-      fields = "*"
-    else
-      fields = custom_fields.join(",")
-    end
+  def check_field
+    params[:field].nil? ? "*" : custom_fields.join(",")
+  end
 
-    if params[:ip]
-      @analytics = Analytics.hits_by_ip(params[:ip], fields)
-    else
-      @analytics = Analytics.all
-    end
+  def check_ip(fields)
+    params[:ip] ? Analytics.hits_by_ip(params[:ip], fields) : Analytics.all
+  end
+
+  def analytics
+    fields = check_field
+    @analytics = check_ip(fields)
   end
 
   def get_all_users
